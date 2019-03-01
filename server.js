@@ -10,6 +10,10 @@ const employeeController = require('./app/controllers/employeeController');
 
 var port = process.env.PORT || 8080;
 
+var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase();
+var mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'];
+var dburl = 'mongodb://'+mongoHost+':27017/EmployeeDB?authSource=admin';
+
 mongoose.Promise = global.Promise;
 app.use(bodyParse.urlencoded({extended : true}));
 app.use(bodyParse.json());
@@ -18,7 +22,7 @@ app.set('views', path.join(__dirname, '/app/views/'));
 app.engine('hbs', exphbs({ extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/app/views/layouts/' }));
 app.set('view engine', 'hbs');
 
-mongoose.connect(dbConfig.url, {
+mongoose.connect(dburl, {
     user: 'admin',
     pass: 'mongodb',
     useNewUrlParser: true
