@@ -8,8 +8,7 @@
     "npm": "*"
   },
   "scripts": {
-    "start": "node main.js",
-    "test": "echo shashi"
+    "start": "node main.js"
   },
   "author": "",
   "license": "ISC",
